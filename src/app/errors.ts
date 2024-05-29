@@ -46,7 +46,7 @@ export const errorHandler = (
   if (error.code === 1100) {
     return res.status(error.status).json({
       message: `Duplicate ${Object.keys(error.keyValue)} Entered`,
-      status: error.status,
+      status: error.code,
       error: error,
     });
   }

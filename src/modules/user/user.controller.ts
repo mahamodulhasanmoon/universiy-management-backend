@@ -3,8 +3,6 @@ import { createStudentService } from './user.service';
 import { sendResponse } from '../../utils/sendResponse';
 import { catchAsync } from '../../utils/catchAsync';
 
-
-
 export const createStudentController: RequestHandler = catchAsync(
   async (req, res) => {
     // const parsedData = studentValidationSchema.parse(req.body)

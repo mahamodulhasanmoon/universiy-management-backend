@@ -34,50 +34,51 @@ const localGuardianSchema = z.object({
 
 // Student Schema
 export const studentValidationSchema = z.object({
-  id: z.string().min(1, { message: 'ID is required' }),
-  name: userNameSchema,
-  username: z
-    .string()
-    .trim()
-    .min(1, { message: 'Username is required' })
-    .min(4, { message: 'Username must be at least 4 characters long' })
-    .max(12, { message: 'Username must be at most 12 characters long' }),
-  email: z
-    .string()
-    .trim()
-    .min(1, { message: 'Email is required' })
-    .email({ message: 'Email is invalid' }),
-  avatar: z.string().optional(),
-  gender: z.enum(['male', 'female', 'others'], {
-    errorMap: () => ({ message: 'Gender is required' }),
-  }),
-  dateOfBirth: z
-    .string()
-    .min(1, { message: 'Date of birth is required' })
-    .transform(date => new Date(date)),
-  contactNo: z
-    .string()
-    .trim()
-    .min(1, { message: 'Contact number is required' }),
-  emergencyContactNo: z
-    .string()
-    .min(1, { message: 'Emergency contact number is required' }),
-  bloodGroup: z
-    .enum(['A+', 'B+', 'O+', 'AB+', 'A-', 'B-', 'AB-', 'O-'], {
-      errorMap: () => ({ message: 'Blood group is invalid' }),
-    })
-    .optional(),
-  presentAddress: z.string().min(1, { message: 'Present address is required' }),
-  permanentAddress: z
-    .string()
-    .min(1, { message: 'Permanent address is required' }),
-  guardian: guardianSchema,
-  localGuardian: localGuardianSchema,
-  isActive: z.enum(['active', 'inactive', 'blocked'], {
-    errorMap: () => ({
-      message: 'Status must be either active, inactive, or blocked',
+  body: z.object({
+    studentData:  z.object({
+      name: userNameSchema,
+      username: z
+        .string()
+        .trim()
+        .min(1, { message: 'Username is required' })
+        .min(4, { message: 'Username must be at least 4 characters long' })
+        .max(12, { message: 'Username must be at most 12 characters long' }),
+      email: z
+        .string()
+        .trim()
+        .min(1, { message: 'Email is required' })
+        .email({ message: 'Email is invalid' }),
+      avatar: z.string().optional(),
+      gender: z.enum(['male', 'female', 'others'], {
+        errorMap: () => ({ message: 'Gender is required' }),
+      }),
+      dateOfBirth: z
+        .string()
+        .min(1, { message: 'Date of birth is required' })
+        .transform(date => new Date(date)),
+      contactNo: z
+        .string()
+        .trim()
+        .min(1, { message: 'Contact number is required' }),
+      emergencyContactNo: z
+        .string()
+        .min(1, { message: 'Emergency contact number is required' }),
+      bloodGroup: z
+        .enum(['A+', 'B+', 'O+', 'AB+', 'A-', 'B-', 'AB-', 'O-'], {
+          errorMap: () => ({ message: 'Blood group is invalid' }),
+        })
+        .optional(),
+      presentAddress: z
+        .string()
+        .min(1, { message: 'Present address is required' }),
+      permanentAddress: z
+        .string()
+        .min(1, { message: 'Permanent address is required' }),
+      guardian: guardianSchema,
+      localGuardian: localGuardianSchema,
     }),
-  }),
+  })
+ 
 });
 
 // Example usage
