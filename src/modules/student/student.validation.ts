@@ -35,7 +35,7 @@ const localGuardianSchema = z.object({
 // Student Schema
 export const studentValidationSchema = z.object({
   body: z.object({
-    studentData:  z.object({
+    studentData: z.object({
       name: userNameSchema,
       username: z
         .string()
@@ -77,8 +77,7 @@ export const studentValidationSchema = z.object({
       guardian: guardianSchema,
       localGuardian: localGuardianSchema,
     }),
-  })
- 
+  }),
 });
 
 // Example usage

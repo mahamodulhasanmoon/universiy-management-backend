@@ -5,9 +5,9 @@ export const requestValidator = (schema: AnyZodObject) => {
   return async (req: Request, _res: Response, next: NextFunction) => {
     try {
       await schema.parseAsync({
-        body : req.body,
+        body: req.body,
       });
-      next()
+      next();
     } catch (error) {
       next(error);
     }
