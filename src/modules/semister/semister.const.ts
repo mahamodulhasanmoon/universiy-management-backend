@@ -1,4 +1,4 @@
-import { Month } from './semister.interface';
+import { ISemesterNameCodeWrapper, Month } from './semister.interface';
 
 export const monthsEnum: Month[] = [
   'January',
@@ -14,3 +14,9 @@ export const monthsEnum: Month[] = [
   'November',
   'December',
 ];
+
+export const semisterNameCodeWrapper: ISemesterNameCodeWrapper = {
+  Autumn: 'A01',
+  Summer: 'S02',
+  Fall: 'F03',
+};

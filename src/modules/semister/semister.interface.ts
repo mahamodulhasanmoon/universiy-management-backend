@@ -12,9 +12,8 @@ export type Month =
   | 'November'
   | 'December';
 
-
-  export type TSemisterName = 'Autumn' | 'Summer' | 'Fall'
-  export type TSemisterCode = 'A01' | 'S02' | 'F03'
+export type TSemisterName = 'Autumn' | 'Summer' | 'Fall';
+export type TSemisterCode = 'A01' | 'S02' | 'F03';
 
 export interface ISemister {
   name: TSemisterName;
@@ -23,3 +22,7 @@ export interface ISemister {
   startMonth: Month;
   endMonth: Month;
 }
+
+export type ISemesterNameCodeWrapper = {
+  [key: string]: string;
+};
