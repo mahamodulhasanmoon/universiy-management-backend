@@ -55,6 +55,10 @@ const studentSchema = new Schema<IStudent, StudentModel>(
   {
     id: { type: String, required: [true, 'ID is required'], unique: true },
     name: { type: userNameSchema, required: [true, 'Name is required'] },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
     email: {
       type: String,
       trim: true,
@@ -79,6 +83,10 @@ const studentSchema = new Schema<IStudent, StudentModel>(
     emergencyContactNo: {
       type: String,
       required: [true, 'Emergency contact number is required'],
+    },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'Semester',
     },
     bloogGroup: {
       type: String,

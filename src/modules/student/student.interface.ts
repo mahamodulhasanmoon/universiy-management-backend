@@ -1,4 +1,5 @@
-import { Model, Types } from 'mongoose';
+import { Types } from 'mongoose';
+import { Model } from 'mongoose';
 
 export type UserName = {
   firstName: string;
@@ -34,6 +35,7 @@ export interface IStudent {
   presentAddress: string;
   permanentAddress: string;
   guardian: Guardian;
+  admissionSemester: Types.ObjectId;
   localGuardian: LocalGuardian;
   profileImg?: string;
   isDeleted: boolean;

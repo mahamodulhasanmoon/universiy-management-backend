@@ -76,6 +76,7 @@ export const studentValidationSchema = z.object({
         .min(1, { message: 'Permanent address is required' }),
       guardian: guardianSchema,
       localGuardian: localGuardianSchema,
+      admissionSemester: z.string(),
     }),
   }),
 });
