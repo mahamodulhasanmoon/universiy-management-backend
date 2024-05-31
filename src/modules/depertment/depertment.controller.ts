@@ -1,8 +1,12 @@
 import { RequestHandler } from 'express';
 import { catchAsync } from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
-import { createDepertmentService,  getAllDepertmentService,  getDepertmentByIdService, updateDepertmentService } from './depertment.service';
-
+import {
+  createDepertmentService,
+  getAllDepertmentService,
+  getDepertmentByIdService,
+  updateDepertmentService,
+} from './depertment.service';
 
 export const createDepertmentController: RequestHandler = catchAsync(
   async (req, res) => {

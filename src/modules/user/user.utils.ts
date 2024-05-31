@@ -1,11 +1,11 @@
 import { ISemister } from '../semister/semister.interface';
 import { User } from './user.model';
 
-const findLastStudentId = async (payload:ISemister) => {
+const findLastStudentId = async (payload: ISemister) => {
   const lastStudent = await User.findOne(
     {
       role: 'student',
-      id: { $regex: `${payload.code}${payload.year}-\\d{4}$` }
+      id: { $regex: `${payload.code}${payload.year}-\\d{4}$` },
     },
     {
       id: 1,
@@ -38,9 +38,8 @@ export const genarateStudentID = async (payload: ISemister) => {
     lastSemisterCode === currentSemesterCode &&
     lastSemisterYear === currentYear
   ) {
-    currentID = lastStudentID?.substring(8)
+    currentID = lastStudentID?.substring(8);
   }
-
 
   const incrementID = (+currentID + 1).toString().padStart(4, '0');
 

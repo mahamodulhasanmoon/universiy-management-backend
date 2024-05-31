@@ -1,8 +1,12 @@
 import { Router } from 'express';
 import { requestValidator } from '../../middlewares/requestValidator';
 import { facultyValidationSchema } from './faculty.validation';
-import { createFacultyController, getAllFacultyController, getFacultyByIdController, updateFacultyByIdController } from './faculty.controller';
-
+import {
+  createFacultyController,
+  getAllFacultyController,
+  getFacultyByIdController,
+  updateFacultyByIdController,
+} from './faculty.controller';
 
 export const facultyRoutes = Router();
 

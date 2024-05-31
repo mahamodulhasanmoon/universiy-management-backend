@@ -1,8 +1,12 @@
 import { Router } from 'express';
 import { requestValidator } from '../../middlewares/requestValidator';
 import { depertmentValidationSchema } from './depertment.validation';
-import { createDepertmentController, getAllDepertmentController, getDepertmentByIdController, updateDepertmentByIdController } from './depertment.controller';
-
+import {
+  createDepertmentController,
+  getAllDepertmentController,
+  getDepertmentByIdController,
+  updateDepertmentByIdController,
+} from './depertment.controller';
 
 export const DepertmentRoutes = Router();
 

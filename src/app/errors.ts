@@ -6,10 +6,9 @@ export class CustomError extends Error {
   constructor(
     public message: string,
     public status: number,
-    public stack="",
+    public stack = '',
   ) {
     super(message);
-    this.status = status;
 
     if (stack) {
       this.stack = stack;
@@ -37,8 +36,8 @@ export const errorHandler = (
 ) => {
   if ('status' in error) {
     return res.status(error.status).json({
-      message: error?.message || 'something went wrong',
       status: error.status,
+      message: error?.message || 'something went wrong',
       error: error,
     });
   }
