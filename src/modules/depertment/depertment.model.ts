@@ -1,7 +1,7 @@
 import  {  Schema,  model } from 'mongoose';
 import { IDepertment } from './depertment.interface';
 
-const facultySchema = new Schema<IDepertment>(
+const depertmentSchema = new Schema<IDepertment>(
   {
     name: {
       type: String,
@@ -18,6 +18,17 @@ const facultySchema = new Schema<IDepertment>(
   },
 );
 
+depertmentSchema.pre('findOneAndUpdate', async function (next) {
+    const query = this.getQuery();
+    const isDepartmentExist = await Depertment.findOne(query);
+  
+    if (!isDepartmentExist) {
+      throw new Error(
+        'This department does not exist! ',
+      );
+    }
+  
+    next();
+  });
 
-
-export const Depertment = model<IDepertment>('Depertment', facultySchema);
+export const Depertment = model<IDepertment>('Depertment', depertmentSchema);
