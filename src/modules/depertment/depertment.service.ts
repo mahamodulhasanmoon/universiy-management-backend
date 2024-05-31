@@ -9,12 +9,12 @@ export const createDepertmentService = async (payload: IDepertment) => {
 };
 
 export const getAllDepertmentService = async () => {
-  const result = await Depertment.find({});
+  const result = await Depertment.find().populate('faculty');
   return result;
 };
 
 export const getDepertmentByIdService = async (id: string) => {
-  const result = await Depertment.findById(id);
+  const result = await Depertment.findById(id).populate('Faculty');
   return result;
 };
 
