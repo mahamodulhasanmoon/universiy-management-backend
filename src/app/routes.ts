@@ -2,6 +2,7 @@ import { NextFunction, Request, Response, Router } from 'express';
 import { studentRoutes } from '../modules/student/student.route';
 import { userRoutes } from '../modules/user/user.route';
 import { academicRoutes } from '../modules/semister/semister.routes';
+import { facultyRoutes } from '../modules/faculty/faculty.routes';
 const routes = Router();
 
 routes.get('/health', (_req: Request, res: Response, next: NextFunction) => {
@@ -27,6 +28,10 @@ const modulerRoutes = [
   {
     path: '/academic-semister',
     route: academicRoutes,
+  },
+  {
+    path: '/academic-faculty',
+    route: facultyRoutes,
   },
 ];
 
