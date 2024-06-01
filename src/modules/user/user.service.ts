@@ -32,7 +32,7 @@ export const createStudentService = async (
     const user = await User.create([userData], { session });
 
     if (!user || user.length === 0) {
-      throw new CustomError('Failed To create User', httpStatus.BAD_REQUEST);
+      throw new CustomError(httpStatus.BAD_REQUEST, 'Failed To create User');
     }
 
     payload.id = user[0].id;
@@ -41,19 +41,15 @@ export const createStudentService = async (
     const result = await Student.create([payload], { session });
 
     if (!result || result.length === 0) {
-      throw new CustomError(
-        'Failed To create Student',
-        httpStatus.BAD_REQUEST,
-      );
+      throw new CustomError(httpStatus.BAD_REQUEST, 'Failed To create Student');
     }
 
     await session.commitTransaction();
     session.endSession();
     return result;
-  } catch (error:any) {
+  } catch (error: any) {
     await session.abortTransaction();
     session.endSession();
-    throw new CustomError(error.message,400)
+    throw new CustomError(400, error.message);
   }
 };
-

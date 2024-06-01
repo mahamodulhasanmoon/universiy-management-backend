@@ -38,6 +38,10 @@ const modulerRoutes = [
     path: '/academic-depertment',
     route: DepertmentRoutes,
   },
+  {
+    path: '/students',
+    route: studentRoutes,
+  },
 ];
 
 modulerRoutes.forEach(({ path, route }) => routes.use(path, route));
