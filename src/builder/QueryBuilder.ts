@@ -14,7 +14,7 @@ export class QueryBuilder<T> {
 
     // get SearchTerm Using Search
 
-    const searchTerm = this?.query?.searchTerm;
+    const searchTerm = this?.query?.searchTerm || '';
     if (this) {
       this.modelQuery = this.modelQuery.find({
         $or: searchableFields.map(
@@ -61,8 +61,10 @@ export class QueryBuilder<T> {
   }
 
   fields() {
-    const fields =
-      (this?.query?.fields as string)?.split(',')?.join(' ') || '-__v';
+  const fields =
+    (this.query && this.query.fields && typeof this.query.fields === 'string')
+    ? (this.query.fields as string).split(',').join(' ')
+    : '-__v';
 
     this.modelQuery = this.modelQuery.select(fields);
     return this;
