@@ -7,6 +7,7 @@ import { handleZodError } from '../errors/zodError';
 import { CustomError } from '../errors/CustomError';
 import { NODE_ENV } from '../config';
 import { mongooseCastError, mongooseValidationError } from '../errors/validation.mongoose.error';
+import { handleDuplicateError } from '../errors/duplicateErrors';
 
 /**
  * =========================== === === Global Error === === =====================
@@ -78,11 +79,11 @@ errors = simplified
 
   if (error.code === 11000) {
     status = 400;
-    message = `Validation Error`;
-
-    const keys = Object.keys(error.keyValue).join(', ');
-    message = ` ${keys} Already Exists`;
-    errors = error;
+    message = `Data Duplication Error`;
+const simplified = handleDuplicateError(error)
+    // const keys = Object.keys(error.keyValue).join(', ');
+    // message = ` ${keys} Already Exists`;
+    errors = simplified;
   }
 
 
