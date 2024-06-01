@@ -14,13 +14,14 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
   let status = 500;
   let message = 'Something went wrong';
   const success = false;
-  let stackTrace: any = { error };
+  let stackTrace: any =error.stack;
   let errors: TErrors = [
     {
       path: req.url,
       message: 'Something went wrong',
     },
   ];
+
 
   /**
    * =========================== === === Custom  Error === === =====================
@@ -29,9 +30,6 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
   if (error instanceof CustomError) {
     status = error.status;
     message = error.message;
-    stackTrace = error.stack
-      ? { ...stackTrace, stack: error.stack }
-      : stackTrace;
   }
 
   /**
@@ -64,13 +62,18 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
    */
   if (error.code === 11000) {
     status = 400;
+    status = 400;
+    message = `Validation Error`;
+    
+
     const keys = Object.keys(error.keyValue).join(', ');
     message = ` ${keys} Already Exists`;
+    errors=error
   }
   
   let jsonResponse: any = { status, success, message,errors };
   if (process.env.NODE_ENV === 'development') {
-    jsonResponse = {...jsonResponse, stack:stackTrace.stack};
+    jsonResponse = {...jsonResponse,stackTrace};
   }
 
   return res.status(status).json(jsonResponse);

@@ -5,5 +5,4 @@ export type TErrors = {
 
   export type TGenericErrorResponse = {
     errorSources: TErrors;
-    stack: string
   };
