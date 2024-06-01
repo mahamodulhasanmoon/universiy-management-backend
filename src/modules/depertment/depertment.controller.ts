@@ -13,6 +13,7 @@ export const createDepertmentController: RequestHandler = catchAsync(
     const DepertmentData = req.body;
 
     const data = await createDepertmentService(DepertmentData);
+    
 
     sendResponse(res, {
       status: 201,
@@ -23,7 +24,7 @@ export const createDepertmentController: RequestHandler = catchAsync(
   },
 );
 
-export const getAllDepertmentController: RequestHandler = async (_req, res) => {
+export const getAllDepertmentController: RequestHandler = catchAsync(async (_req, res) => {
   const result = await getAllDepertmentService();
   sendResponse(res, {
     status: 200,
@@ -31,20 +32,21 @@ export const getAllDepertmentController: RequestHandler = async (_req, res) => {
     message: 'All Depertments fetch successfully',
     data: result,
   });
-};
+})
 
-export const getDepertmentByIdController: RequestHandler = async (req, res) => {
+export const getDepertmentByIdController: RequestHandler =catchAsync( async (req, res) => {
   const { id } = req.params;
   const result = await getDepertmentByIdService(id);
+  
   sendResponse(res, {
     status: 200,
     success: true,
     message: ' Depertment fetch successfully',
     data: result,
   });
-};
+});
 
-export const updateDepertmentByIdController: RequestHandler = async (
+export const updateDepertmentByIdController: RequestHandler = catchAsync(async (
   req,
   res,
 ) => {
@@ -57,4 +59,4 @@ export const updateDepertmentByIdController: RequestHandler = async (
     message: ' Depertment fetch successfully',
     data: result,
   });
-};
+});

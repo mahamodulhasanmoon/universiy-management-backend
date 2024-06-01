@@ -12,7 +12,8 @@ export const getAllDepertmentService = async () => {
 };
 
 export const getDepertmentByIdService = async (id: string) => {
-  const result = await Depertment.findById(id).populate('Faculty');
+  const result = await Depertment.findById(id);
+  console.log(result);
   return result;
 };
 

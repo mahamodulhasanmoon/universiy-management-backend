@@ -6,6 +6,7 @@ import { TErrors } from '../interfaces/error.interface';
 import { handleZodError } from '../errors/zodError';
 import { CustomError } from '../errors/CustomError';
 import { NODE_ENV } from '../config';
+import { mongooseCastError, mongooseValidationError } from '../errors/validation.mongoose.error';
 
 /**
  * =========================== === === Global Error === === =====================
@@ -22,7 +23,6 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
       message: 'Something went wrong',
     },
   ];
-
   /**
    * =========================== === === Custom  Error === === =====================
    */
@@ -36,9 +36,14 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
    * =========================== === === CAST  Error === === =====================
    */
 
+  
   if (error.name === 'CastError') {
-    status = 404;
-    message = `Resource not found in ${error.path}`;
+   
+    status = 400;
+    message = `Invalid ID`;
+    const simplified = mongooseCastError(error)
+errors = simplified
+    
   }
 
   /**
@@ -59,8 +64,19 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
   /**
    * =========================== === === MOngoose   Error === === =====================
    */
-  if (error.code === 11000) {
+
+  if(error.name ==='ValidationError' ){
     status = 400;
+    message = `Validation Error`;
+    const simplified = mongooseValidationError(error)
+errors = simplified
+  }
+
+
+
+  
+
+  if (error.code === 11000) {
     status = 400;
     message = `Validation Error`;
 
@@ -69,7 +85,11 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
     errors = error;
   }
 
+
+
   return res
     .status(status)
-    .json({ status, success, message, errors, stackTrace });
+    .json({ status, success, message, errors,error, stackTrace });
 };
+
+
