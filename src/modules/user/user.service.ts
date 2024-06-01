@@ -1,5 +1,5 @@
 import { startSession } from 'mongoose';
-import { CustomError } from '../../app/errors';
+
 import { defaultPass } from '../../config';
 import { Semester } from '../semister/semister.model';
 import { IStudent } from '../student/student.interface';
@@ -8,6 +8,7 @@ import { IUser } from './user.interface';
 import { User } from './user.model';
 import { genarateStudentID } from './user.utils';
 import httpStatus from 'http-status';
+import { CustomError } from '../../errors/CustomError';
 
 export const createStudentService = async (
   password: string,

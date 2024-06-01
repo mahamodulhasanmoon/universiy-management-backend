@@ -1,35 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-unused-vars */
-import { RequestHandler, ErrorRequestHandler } from 'express';
-import { baseUrl } from '../config';
+import { ErrorRequestHandler } from 'express';
 import { ZodError } from 'zod';
 import { TErrors } from '../interfaces/error.interface';
 import { handleZodError } from '../errors/zodError';
+import { CustomError } from '../errors/CustomError';
 
-export class CustomError extends Error {
-  constructor(
-    public status: number = 500,
-    public message: string,
-    public stack = '',
-  ) {
-    super(message);
-    if (!stack) {
-      Error.captureStackTrace(this, this.constructor);
-    }
-  }
-}
-
-/**
- * =========================== === === NotFoundError === === =====================
- */
-
-export const notFoundHandler: RequestHandler = (req, _res, next) => {
-  const error = new CustomError(
-    404,
-    `Resource not found in ${baseUrl + req.url}`,
-  );
-  next(error);
-};
 /**
  * =========================== === === Global Error === === =====================
  */

@@ -1,13 +1,12 @@
 import { startSession } from 'mongoose';
 import { Student } from './student.model';
-import { CustomError } from '../../app/errors';
 import { User } from '../user/user.model';
+import { CustomError } from '../../errors/CustomError';
 
 export const deleteStudentService = async (id: string) => {
   if ((await Student.isUserExist(id)) === null) {
     throw new CustomError(404, 'User Not Exist');
   }
-  console.log(await Student.isUserExist(id));
 
   const session = await startSession();
 
