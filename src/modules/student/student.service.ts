@@ -2,6 +2,34 @@ import { startSession } from 'mongoose';
 import { Student } from './student.model';
 import { User } from '../user/user.model';
 import { CustomError } from '../../errors/CustomError';
+import { QueryBuilder } from '../../builder/queryBuilder';
+import { studentSearchableFields } from './student.constant';
+
+export const getAllStudentService = async (query: Record<string, unknown>) => {
+  const studentQuery = new QueryBuilder(
+    Student.find().populate('admissionSemester'),
+    // .populate({
+    //   path: 'academicDepartment',
+    //   populate: {
+    //     path: 'academicFaculty',
+    //   },
+    // })
+    query,
+  )
+    .search(studentSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
+
+  const result = await studentQuery.modelQuery;
+  return result;
+};
+
+export const getStudentByIdService = async (id: string) => {
+  const result = await Student.aggregate([{ $match: { id } }]);
+  return result;
+};
 
 export const deleteStudentService = async (id: string) => {
   if ((await Student.isUserExist(id)) === null) {
