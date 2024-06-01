@@ -5,6 +5,7 @@ import { ZodError } from 'zod';
 import { TErrors } from '../interfaces/error.interface';
 import { handleZodError } from '../errors/zodError';
 import { CustomError } from '../errors/CustomError';
+import { NODE_ENV } from '../config';
 
 /**
  * =========================== === === Global Error === === =====================
@@ -14,14 +15,13 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
   let status = 500;
   let message = 'Something went wrong';
   const success = false;
-  let stackTrace: any =error.stack;
+  let stackTrace: any = NODE_ENV === 'development' ? error.stack : null;
   let errors: TErrors = [
     {
       path: req.url,
       message: 'Something went wrong',
     },
   ];
-
 
   /**
    * =========================== === === Custom  Error === === =====================
@@ -49,12 +49,11 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
     status = 400;
     message = `Validation Error`;
     stackTrace = error.stack
-    ? { ...stackTrace, stack: error.stack }
-    : stackTrace;
+      ? { ...stackTrace, stack: error.stack }
+      : stackTrace;
     const simplified = handleZodError(error);
 
     errors = simplified;
-    
   }
 
   /**
@@ -64,17 +63,13 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
     status = 400;
     status = 400;
     message = `Validation Error`;
-    
 
     const keys = Object.keys(error.keyValue).join(', ');
     message = ` ${keys} Already Exists`;
-    errors=error
-  }
-  
-  let jsonResponse: any = { status, success, message,errors };
-  if (process.env.NODE_ENV === 'development') {
-    jsonResponse = {...jsonResponse,stackTrace};
+    errors = error;
   }
 
-  return res.status(status).json(jsonResponse);
+  return res
+    .status(status)
+    .json({ status, success, message, errors, stackTrace });
 };

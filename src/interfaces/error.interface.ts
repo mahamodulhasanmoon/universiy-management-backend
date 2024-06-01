@@ -1,8 +1,8 @@
 export type TErrors = {
-    path: string | number;
-    message: string;
-  }[];
+  path: string | number;
+  message: string;
+}[];
 
-  export type TGenericErrorResponse = {
-    errorSources: TErrors;
-  };
+export type TGenericErrorResponse = {
+  errorSources: TErrors;
+};
