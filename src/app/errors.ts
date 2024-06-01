@@ -31,6 +31,12 @@ export const errorHandler: ErrorRequestHandler = (error, req, res, _next) => {
   if (error instanceof CustomError) {
     status = error.status;
     message = error.message;
+    errors =[
+      {
+        path:'',
+        message : error?.message
+      }
+    ]
   }
 
   /**
