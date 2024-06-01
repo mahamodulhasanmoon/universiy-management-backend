@@ -81,8 +81,6 @@ errors = simplified
     status = 400;
     message = `Data Duplication Error`;
 const simplified = handleDuplicateError(error)
-    // const keys = Object.keys(error.keyValue).join(', ');
-    // message = ` ${keys} Already Exists`;
     errors = simplified;
   }
 
