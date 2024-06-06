@@ -13,7 +13,6 @@ export const createDepertmentController: RequestHandler = catchAsync(
     const DepertmentData = req.body;
 
     const data = await createDepertmentService(DepertmentData);
-    
 
     sendResponse(res, {
       status: 201,
@@ -24,39 +23,42 @@ export const createDepertmentController: RequestHandler = catchAsync(
   },
 );
 
-export const getAllDepertmentController: RequestHandler = catchAsync(async (_req, res) => {
-  const result = await getAllDepertmentService();
-  sendResponse(res, {
-    status: 200,
-    success: true,
-    message: 'All Depertments fetch successfully',
-    data: result,
-  });
-})
+export const getAllDepertmentController: RequestHandler = catchAsync(
+  async (_req, res) => {
+    const result = await getAllDepertmentService();
+    sendResponse(res, {
+      status: 200,
+      success: true,
+      message: 'All Depertments fetch successfully',
+      data: result,
+    });
+  },
+);
 
-export const getDepertmentByIdController: RequestHandler =catchAsync( async (req, res) => {
-  const { id } = req.params;
-  const result = await getDepertmentByIdService(id);
-  
-  sendResponse(res, {
-    status: 200,
-    success: true,
-    message: ' Depertment fetch successfully',
-    data: result,
-  });
-});
+export const getDepertmentByIdController: RequestHandler = catchAsync(
+  async (req, res) => {
+    const { id } = req.params;
+    const result = await getDepertmentByIdService(id);
 
-export const updateDepertmentByIdController: RequestHandler = catchAsync(async (
-  req,
-  res,
-) => {
-  const { id } = req.params;
-  const data = req.body;
-  const result = await updateDepertmentService(id, data);
-  sendResponse(res, {
-    status: 200,
-    success: true,
-    message: ' Depertment fetch successfully',
-    data: result,
-  });
-});
+    sendResponse(res, {
+      status: 200,
+      success: true,
+      message: ' Depertment fetch successfully',
+      data: result,
+    });
+  },
+);
+
+export const updateDepertmentByIdController: RequestHandler = catchAsync(
+  async (req, res) => {
+    const { id } = req.params;
+    const data = req.body;
+    const result = await updateDepertmentService(id, data);
+    sendResponse(res, {
+      status: 200,
+      success: true,
+      message: ' Depertment fetch successfully',
+      data: result,
+    });
+  },
+);

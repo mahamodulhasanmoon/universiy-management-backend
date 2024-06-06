@@ -7,11 +7,9 @@ export class QueryBuilder<T> {
   ) {
     this.modelQuery = modelQuery;
     this.query = query;
-  };
-  
+  }
 
   search(searchableFields: string[]) {
-
     // get SearchTerm Using Search
 
     const searchTerm = this?.query?.searchTerm || '';
@@ -30,7 +28,7 @@ export class QueryBuilder<T> {
   }
 
   filter() {
-    const queryObj = { ...this.query }; 
+    const queryObj = { ...this.query };
 
     // Filtering
     const excludeFields = ['searchTerm', 'sort', 'limit', 'page', 'fields'];
@@ -61,10 +59,10 @@ export class QueryBuilder<T> {
   }
 
   fields() {
-  const fields =
-    (this.query && this.query.fields && typeof this.query.fields === 'string')
-    ? (this.query.fields as string).split(',').join(' ')
-    : '-__v';
+    const fields =
+      this.query && this.query.fields && typeof this.query.fields === 'string'
+        ? (this.query.fields as string).split(',').join(' ')
+        : '-__v';
 
     this.modelQuery = this.modelQuery.select(fields);
     return this;

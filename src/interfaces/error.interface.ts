@@ -4,8 +4,8 @@ export type TErrors = {
 }[];
 
 export type TGenericErrorResponse = {
-    errors: TErrors;
-  status:number;
-  message:string;
-  stackTrace:string
+  errors: TErrors;
+  status: number;
+  message: string;
+  stackTrace: string;
 };

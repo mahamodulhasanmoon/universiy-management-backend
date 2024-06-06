@@ -9,7 +9,7 @@ let server: Server;
   try {
     if (mongoUrl) {
       await connectMongoDB(mongoUrl);
-      server =  app.listen(port, () => {
+      server = app.listen(port, () => {
         console.log(`server is running at ${port}`);
       });
     } else {
@@ -19,7 +19,6 @@ let server: Server;
     console.error('Failed to connect to the database:', error);
   }
 })();
-
 
 process.on('unhandledRejection', () => {
   console.log(`⚠️ unahandledRejection is detected ❗, shutting down ...😞😞`);
@@ -35,4 +34,3 @@ process.on('uncaughtException', () => {
   console.log(`⚠️ uncaughtException is detected ❗ , shutting down ...😞😞`);
   process.exit(1);
 });
-

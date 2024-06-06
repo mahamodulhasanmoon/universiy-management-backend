@@ -6,9 +6,12 @@ import { IStudent } from '../student/student.interface';
 import { Student } from '../student/student.model';
 import { IUser } from './user.interface';
 import { User } from './user.model';
-import { genarateStudentID } from './user.utils';
+import { genarateStudentID, generateFacultyId } from './user.utils';
 import httpStatus from 'http-status';
 import { CustomError } from '../../errors/CustomError';
+import { IFacultyMember } from '../facultyMember/facultymember.interface';
+import { FacultyMember } from '../facultyMember/facultyMember.model';
+import { Depertment } from '../depertment/depertment.model';
 
 export const createStudentService = async (
   password: string,
@@ -52,5 +55,64 @@ export const createStudentService = async (
     await session.abortTransaction();
     session.endSession();
     throw new CustomError(400, error.message);
+  }
+};
+
+export const createFacultyMemberService = async (
+  password: string,
+  payload: IFacultyMember,
+) => {
+  // create a user object
+  const userData: Partial<IUser> = {};
+
+  //if password is not given , use deafult password
+  userData.password = password || (defaultPass as string);
+
+  //set student role
+  userData.role = 'faculty';
+
+  // find academic department info
+  const academicDepartment = await Depertment.findById(
+    payload.academicDepartment,
+  );
+
+  if (!academicDepartment) {
+    throw new CustomError(400, 'Academic department not found');
+  }
+
+  const session = await startSession();
+
+  try {
+    session.startTransaction();
+    //set  generated id
+    userData.id = await generateFacultyId();
+
+    // create a user (transaction-1)
+    const newUser = await User.create([userData], { session }); // array
+
+    //create a faculty
+    if (!newUser.length) {
+      throw new CustomError(httpStatus.BAD_REQUEST, 'Failed to create user');
+    }
+    // set id , _id as user
+    payload.id = newUser[0].id;
+    payload.user = newUser[0]._id; //reference _id
+
+    // create a faculty (transaction-2)
+
+    const newFaculty = await FacultyMember.create([payload], { session });
+
+    if (!newFaculty.length) {
+      throw new CustomError(httpStatus.BAD_REQUEST, 'Failed to create faculty');
+    }
+
+    await session.commitTransaction();
+    await session.endSession();
+
+    return newFaculty;
+  } catch (err: any) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw new Error(err);
   }
 };

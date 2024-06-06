@@ -4,6 +4,7 @@ import { userRoutes } from '../modules/user/user.route';
 import { academicRoutes } from '../modules/semister/semister.routes';
 import { facultyRoutes } from '../modules/faculty/faculty.routes';
 import { DepertmentRoutes } from '../modules/depertment/depertment.routes';
+import { CourseRoutes } from '../modules/Course/course.routes';
 const routes = Router();
 
 routes.get('/health', (_req: Request, res: Response, next: NextFunction) => {
@@ -41,6 +42,10 @@ const modulerRoutes = [
   {
     path: '/students',
     route: studentRoutes,
+  },
+  {
+    path: '/courses',
+    route: CourseRoutes,
   },
 ];
 
