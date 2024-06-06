@@ -15,7 +15,6 @@ const preRequisiteCoursesSchema = new Schema<IPreRequisiteCourses>({
   },
 });
 
-
 const courseSchema = new Schema({
   title: {
     type: String,
@@ -40,6 +39,4 @@ const courseSchema = new Schema({
   preRequisiteCourses: [preRequisiteCoursesSchema],
 });
 
-
 export const Course = model<ICourse>('Course', courseSchema);
-

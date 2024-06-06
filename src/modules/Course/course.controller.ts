@@ -1,8 +1,13 @@
 import { RequestHandler } from 'express';
 import { catchAsync } from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
-import { createCourseService, deleteCourseByIdService, getAllCourseService, getCourseByIdService, updateCourseByIdService } from './course.service';
-
+import {
+  createCourseService,
+  deleteCourseByIdService,
+  getAllCourseService,
+  getCourseByIdService,
+  updateCourseByIdService,
+} from './course.service';
 
 export const createCourseController: RequestHandler = catchAsync(
   async (req, res) => {

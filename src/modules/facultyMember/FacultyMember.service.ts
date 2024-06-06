@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
-import { QueryBuilder } from '../../builder/queryBuilder';
+import { QueryBuilder } from '../../builder/QueryBuilder';
 import { FacultySearchableFields } from './facultyMember.constant';
 import { FacultyMember } from './facultyMember.model';
 import { User } from '../user/user.model';

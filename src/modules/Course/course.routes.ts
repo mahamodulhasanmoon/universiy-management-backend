@@ -1,9 +1,13 @@
 import { Router } from 'express';
 import { requestValidator } from '../../middlewares/requestValidator';
-import { createCourseValidationSchema } from './course.validation';
-import { createCourseController, deleteCourseByIdController, getAllCourseController, getCourseByIdController, updateCourseByIdController } from './course.controller';
-
-
+import { createCourseValidationSchema, updateCourseValidationSchema } from './course.validation';
+import {
+  createCourseController,
+  deleteCourseByIdController,
+  getAllCourseController,
+  getCourseByIdController,
+  updateCourseByIdController,
+} from './course.controller';
 
 export const CourseRoutes = Router();
 
@@ -18,10 +22,7 @@ CourseRoutes.get('/', getAllCourseController);
 CourseRoutes.get('/:id', getCourseByIdController);
 CourseRoutes.patch(
   '/:id',
-//   requestValidator(),
+    requestValidator(updateCourseValidationSchema),
   updateCourseByIdController,
 );
-CourseRoutes.delete(
-  '/:id',
-  deleteCourseByIdController,
-);
+CourseRoutes.delete('/:id', deleteCourseByIdController);

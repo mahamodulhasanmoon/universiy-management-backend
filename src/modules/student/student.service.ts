@@ -2,8 +2,8 @@ import { startSession } from 'mongoose';
 import { Student } from './student.model';
 import { User } from '../user/user.model';
 import { CustomError } from '../../errors/CustomError';
-import { QueryBuilder } from '../../builder/queryBuilder';
 import { studentSearchableFields } from './student.constant';
+import { QueryBuilder } from '../../builder/QueryBuilder';
 
 export const getAllStudentService = async (query: Record<string, unknown>) => {
   const studentQuery = new QueryBuilder(
