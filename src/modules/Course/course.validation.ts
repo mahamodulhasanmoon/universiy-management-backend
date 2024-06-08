@@ -39,7 +39,7 @@ export const createCourseValidationSchema = z.object({
       })
       .int('Credits must be an integer'),
     isDeleted: z.boolean().optional(),
-    preRequisiteCourses: z.array(preRequisiteCoursesSchema),
+    preRequisiteCourses: z.array(preRequisiteCoursesSchema).optional(),
   }),
 });
 

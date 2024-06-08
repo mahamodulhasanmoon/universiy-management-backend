@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { requestValidator } from '../../middlewares/requestValidator';
 import { createCourseValidationSchema, updateCourseValidationSchema } from './course.validation';
 import {
+  assignFacultiesController,
   createCourseController,
   deleteCourseByIdController,
   getAllCourseController,
@@ -24,5 +25,11 @@ CourseRoutes.patch(
   '/:id',
     requestValidator(updateCourseValidationSchema),
   updateCourseByIdController,
+);
+// assign Faculties
+CourseRoutes.put(
+  '/:id/assign-faculties',
+    // requestValidator(updateCourseValidationSchema),
+    assignFacultiesController,
 );
 CourseRoutes.delete('/:id', deleteCourseByIdController);

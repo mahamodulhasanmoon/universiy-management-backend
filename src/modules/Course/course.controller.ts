@@ -2,10 +2,12 @@ import { RequestHandler } from 'express';
 import { catchAsync } from '../../utils/catchAsync';
 import { sendResponse } from '../../utils/sendResponse';
 import {
+  assignCourseFacultyService,
   createCourseService,
   deleteCourseByIdService,
   getAllCourseService,
   getCourseByIdService,
+  removeCourseFacultyService,
   updateCourseByIdService,
 } from './course.service';
 
@@ -60,6 +62,37 @@ export const updateCourseByIdController: RequestHandler = async (req, res) => {
 export const deleteCourseByIdController: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const result = await deleteCourseByIdService(id as string);
+  sendResponse(res, {
+    status: 200,
+    success: true,
+    message: ' Course delete successfully',
+    data: result,
+  });
+};
+
+export const assignFacultiesController: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  const { faculties } = req.body;
+
+  const result = await assignCourseFacultyService(
+    id,
+    faculties,
+  );
+  sendResponse(res, {
+    status: 200,
+    success: true,
+    message: ' Course delete successfully',
+    data: result,
+  });
+};
+export const removeFacultyController: RequestHandler = async (req, res) => {
+  const { id } = req.params;
+  const { faculties } = req.body;
+
+  const result = await removeCourseFacultyService(
+    id,
+    faculties,
+  );
   sendResponse(res, {
     status: 200,
     success: true,
