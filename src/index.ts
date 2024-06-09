@@ -20,8 +20,10 @@ let server: Server;
   }
 })();
 
-process.on('unhandledRejection', (error:any) => {
-  console.log(`${error.message},\n ⚠️ unahandledRejection is detected ❗, shutting down ...😞😞,`);
+process.on('unhandledRejection', (error: any) => {
+  console.log(
+    `${error.message},\n ⚠️ unahandledRejection is detected ❗, shutting down ...😞😞,`,
+  );
   if (server) {
     server.close(() => {
       process.exit(1);
@@ -30,7 +32,9 @@ process.on('unhandledRejection', (error:any) => {
   process.exit(1);
 });
 
-process.on('uncaughtException', (error) => {
-  console.log(`${error.message}, \n ⚠️ uncaughtException is detected ❗ , shutting down ...😞😞`);
+process.on('uncaughtException', error => {
+  console.log(
+    `${error.message}, \n ⚠️ uncaughtException is detected ❗ , shutting down ...😞😞`,
+  );
   process.exit(1);
 });

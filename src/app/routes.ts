@@ -5,6 +5,7 @@ import { academicRoutes } from '../modules/semister/semister.routes';
 import { facultyRoutes } from '../modules/faculty/faculty.routes';
 import { DepertmentRoutes } from '../modules/depertment/depertment.routes';
 import { CourseRoutes } from '../modules/Course/course.routes';
+import { semesterRegisterRoutes } from '../modules/RegisterSemister/registerSemester.routes';
 const routes = Router();
 
 routes.get('/health', (_req: Request, res: Response, next: NextFunction) => {
@@ -46,6 +47,10 @@ const modulerRoutes = [
   {
     path: '/courses',
     route: CourseRoutes,
+  },
+  {
+    path: '/semester-register',
+    route: semesterRegisterRoutes,
   },
 ];
 

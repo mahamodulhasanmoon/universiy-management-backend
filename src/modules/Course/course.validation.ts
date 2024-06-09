@@ -45,5 +45,5 @@ export const createCourseValidationSchema = z.object({
 
 // For Update Course
 
-
-export const  updateCourseValidationSchema = createCourseValidationSchema.partial()
+export const updateCourseValidationSchema =
+  createCourseValidationSchema.partial();

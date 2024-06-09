@@ -74,10 +74,7 @@ export const assignFacultiesController: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const { faculties } = req.body;
 
-  const result = await assignCourseFacultyService(
-    id,
-    faculties,
-  );
+  const result = await assignCourseFacultyService(id, faculties);
   sendResponse(res, {
     status: 200,
     success: true,
@@ -89,10 +86,7 @@ export const removeFacultyController: RequestHandler = async (req, res) => {
   const { id } = req.params;
   const { faculties } = req.body;
 
-  const result = await removeCourseFacultyService(
-    id,
-    faculties,
-  );
+  const result = await removeCourseFacultyService(id, faculties);
   sendResponse(res, {
     status: 200,
     success: true,

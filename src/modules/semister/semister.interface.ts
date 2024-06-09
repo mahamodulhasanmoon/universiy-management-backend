@@ -1,3 +1,5 @@
+import { Model, Types } from 'mongoose';
+
 export type Month =
   | 'January'
   | 'February'
@@ -26,3 +28,8 @@ export interface ISemister {
 export type ISemesterNameCodeWrapper = {
   [key: string]: string;
 };
+
+export interface SemisterModel extends Model<ISemister> {
+  // eslint-disable-next-line no-unused-vars
+  isSemesterExists(id: Types.ObjectId): Promise<ISemister | null>;
+}

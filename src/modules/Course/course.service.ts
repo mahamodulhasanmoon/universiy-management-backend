@@ -61,8 +61,8 @@ export const updateCourseByIdService = async (
     if (preRequisiteCourses && preRequisiteCourses.length > 0) {
       // filter out the deleted fields
       const deletedPreRequisites = preRequisiteCourses
-        .filter((el) => el.course && el.isDeleted)
-        .map((el) => el.course);
+        .filter(el => el.course && el.isDeleted)
+        .map(el => el.course);
 
       const deletedPreRequisiteCourses = await Course.findByIdAndUpdate(
         id,
@@ -79,12 +79,15 @@ export const updateCourseByIdService = async (
       );
 
       if (!deletedPreRequisiteCourses) {
-        throw new CustomError(httpStatus.BAD_REQUEST, 'Failed to update course!');
+        throw new CustomError(
+          httpStatus.BAD_REQUEST,
+          'Failed to update course!',
+        );
       }
 
       // filter out the new course fields
       const newPreRequisites = preRequisiteCourses?.filter(
-        (el) => el.course && !el.isDeleted,
+        el => el.course && !el.isDeleted,
       );
 
       const newPreRequisiteCourses = await Course.findByIdAndUpdate(
@@ -100,7 +103,10 @@ export const updateCourseByIdService = async (
       );
 
       if (!newPreRequisiteCourses) {
-        throw new CustomError(httpStatus.BAD_REQUEST, 'Failed to update course!');
+        throw new CustomError(
+          httpStatus.BAD_REQUEST,
+          'Failed to update course!',
+        );
       }
     }
 
@@ -117,7 +123,6 @@ export const updateCourseByIdService = async (
     await session.endSession();
     throw new CustomError(httpStatus.BAD_REQUEST, 'Failed to update course');
   }
-
 };
 
 export const deleteCourseByIdService = async (id: string) => {
@@ -133,10 +138,6 @@ export const deleteCourseByIdService = async (id: string) => {
 
   return result;
 };
-
-
-
-
 
 export const assignCourseFacultyService = async (
   id: string,
