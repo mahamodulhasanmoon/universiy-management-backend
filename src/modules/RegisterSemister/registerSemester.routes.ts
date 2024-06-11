@@ -5,6 +5,7 @@ import {
   getRegisterSemesterController,
 } from './registerSemester.controller';
 import { createRegisterValidation } from './registerSemester.validation';
+import { updateSemesterByIdController } from '../semister/semister.controller';
 
 export const semesterRegisterRoutes = Router();
 
@@ -14,3 +15,4 @@ semesterRegisterRoutes.post(
   createSemisterRegisterController,
 );
 semesterRegisterRoutes.get('/', getRegisterSemesterController);
+semesterRegisterRoutes.get('/:id', updateSemesterByIdController);

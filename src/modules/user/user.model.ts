@@ -1,9 +1,9 @@
 import { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { IUser } from './user.interface';
+import { IUser, IUserModel } from './user.interface';
 import { saltRound } from '../../config';
 
-const userSchema = new Schema<IUser>(
+const userSchema = new Schema<IUser, IUserModel>(
   {
     id: {
       type: String,
@@ -60,4 +60,12 @@ userSchema.post('save', function (doc, next) {
   next();
 });
 
-export const User = model<IUser>('User', userSchema);
+userSchema.statics.isUserExists = async function (id) {
+  const existingUser = await User.findOne({ id });
+  return existingUser;
+};
+userSchema.methods.comparePassword = function (password: string) {
+  return bcrypt.compareSync(password, this.password);
+};
+
+export const User = model<IUser, IUserModel>('User', userSchema);
